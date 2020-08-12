@@ -11,7 +11,7 @@ nbqmemory::nbqmemory(const char* process_name, DWORD access_rights)
 
 nbqmemory::~nbqmemory()
 {
-	CloseHandle(this->process_handle);
+	detach();
 }
 
 bool nbqmemory::attach(const char* process_name, DWORD access_rights)
@@ -35,6 +35,11 @@ bool nbqmemory::attach(const char* process_name, DWORD access_rights)
 	}
 	printf("process_handle(%s): 0x%x\n", process_name, (DWORD)this->process_handle);
 	if (this->process_handle) { return true; } else { return false; }	
+}
+
+bool nbqmemory::detach()
+{
+	return CloseHandle(this->process_handle);
 }
  
 module nbqmemory::get_module(const char* module_name)

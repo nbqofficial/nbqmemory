@@ -30,6 +30,8 @@ class nbqmemory
 
 		bool attach(const char* process_name, DWORD access_rights);
 
+		bool detach();
+
 		module get_module(const char* module_name);
 
 		bool compare_memory(const byte* data, const char* pattern);
