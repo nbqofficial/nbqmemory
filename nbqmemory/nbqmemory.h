@@ -22,9 +22,13 @@ class nbqmemory
 
 	public:
 
+		nbqmemory();
+
 		nbqmemory(const char* process_name, DWORD access_rights);
 
 		~nbqmemory();
+
+		bool attach(const char* process_name, DWORD access_rights);
 
 		module get_module(const char* module_name);
 

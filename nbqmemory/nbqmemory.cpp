@@ -1,6 +1,20 @@
 #include "nbqmemory.h"
 
+nbqmemory::nbqmemory()
+{
+}
+
 nbqmemory::nbqmemory(const char* process_name, DWORD access_rights)
+{
+	attach(process_name, access_rights);
+}
+
+nbqmemory::~nbqmemory()
+{
+	CloseHandle(this->process_handle);
+}
+
+bool nbqmemory::attach(const char* process_name, DWORD access_rights)
 {
 	HANDLE ss = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
 	if (ss)
@@ -20,13 +34,9 @@ nbqmemory::nbqmemory(const char* process_name, DWORD access_rights)
 		CloseHandle(ss);
 	}
 	printf("process_handle(%s): 0x%x\n", process_name, (DWORD)this->process_handle);
+	if (this->process_handle) { return true; } else { return false; }	
 }
-
-nbqmemory::~nbqmemory()
-{
-	CloseHandle(this->process_handle);
-}
-
+ 
 module nbqmemory::get_module(const char* module_name)
 {
 	module mod = { 0 };
