@@ -33,8 +33,9 @@ bool nbqmemory::attach(const char* process_name, DWORD access_rights)
 		}
 		CloseHandle(ss);
 	}
+#ifdef _DEBUG
 	printf("process_handle(%s): 0x%x\n", process_name, (DWORD)this->process_handle);
-	if (this->process_handle) { return true; } else { return false; }	
+#endif	if (this->process_handle) { return true; } else { return false; }	
 }
 
 bool nbqmemory::detach()
