@@ -1,9 +1,9 @@
+#include <stdio.h>
+
 #include "nbqmemory.h"
 
-
-int main()
-{
+int main() {
 	nbqmemory memory("csgo.exe", PROCESS_ALL_ACCESS);
-	getchar();
+	(void)getchar();
 	return 0;
 }
